@@ -1,8 +1,9 @@
 "use client";
 
-import { Zap, Moon, Sun, Github } from "lucide-react";
+import { Moon, Sun, Github } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 export function Header() {
   const [isDark, setIsDark] = useState(true);
@@ -15,8 +16,14 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
         <div className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 shadow-lg shadow-violet-500/25">
-            <Zap className="h-5 w-5 text-white" />
+          <div className="relative flex h-9 w-9 items-center justify-center rounded-lg overflow-hidden">
+            <Image 
+              src="/logo.png" 
+              alt="ImageSquash Logo" 
+              width={36} 
+              height={36} 
+              className="object-cover"
+            />
           </div>
           <div className="flex flex-col">
             <span className="text-lg font-bold tracking-tight">ImageSquash</span>
@@ -38,7 +45,7 @@ export function Header() {
             )}
           </Button>
           <Button variant="ghost" size="icon" className="rounded-full" asChild>
-            <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/stefan-ysh/Image-squash.git" target="_blank" rel="noopener noreferrer">
               <Github className="h-5 w-5" />
             </a>
           </Button>

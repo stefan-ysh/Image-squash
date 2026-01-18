@@ -7,6 +7,7 @@ import { ImagePreview } from "@/components/image-preview";
 import { Header } from "@/components/header";
 import { FeaturesSection } from "@/components/features-section";
 import { useCompressionStore } from "@/store/compression-store";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const { images, selectedImageId } = useCompressionStore();
@@ -20,35 +21,88 @@ export default function Home() {
         {!hasImages ? (
           <>
             {/* Hero Section */}
-            <div className="text-center py-12 mb-8">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <motion.div 
+              className="text-center py-12 mb-8"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
+              <motion.h1 
+                className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.7, delay: 0.1 }}
+              >
                 ImageSquash
-              </h1>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              </motion.h1>
+              <motion.p 
+                className="text-xl text-muted-foreground max-w-2xl mx-auto"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
                 Professional image compression tool — Fast, Secure, Free
-              </p>
-            </div>
+              </motion.p>
+              
+              {/* Animated decorative elements */}
+              <motion.div
+                className="absolute top-32 left-1/4 w-64 h-64 bg-violet-500/5 rounded-full blur-3xl -z-10"
+                animate={{ 
+                  scale: [1, 1.2, 1],
+                  opacity: [0.3, 0.5, 0.3],
+                }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              />
+              <motion.div
+                className="absolute top-40 right-1/4 w-48 h-48 bg-purple-500/5 rounded-full blur-3xl -z-10"
+                animate={{ 
+                  scale: [1.2, 1, 1.2],
+                  opacity: [0.5, 0.3, 0.5],
+                }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              />
+            </motion.div>
             
             {/* Upload Zone */}
-            <div className="flex items-center justify-center min-h-[400px]">
+            <motion.div 
+              className="flex items-center justify-center min-h-[400px]"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
               <UploadZone />
-            </div>
+            </motion.div>
             
             {/* Features Section */}
             <FeaturesSection />
           </>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <motion.div 
+            className="grid grid-cols-1 lg:grid-cols-12 gap-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+          >
             {/* Left Panel - Image List */}
-            <div className="lg:col-span-3">
+            <motion.div 
+              className="lg:col-span-3"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+            >
               <div className="sticky top-24 space-y-4">
                 <ImageList />
                 <UploadZone compact />
               </div>
-            </div>
+            </motion.div>
 
             {/* Center Panel - Preview */}
-            <div className="lg:col-span-6">
+            <motion.div 
+              className="lg:col-span-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+            >
               {selectedImageId ? (
                 <ImagePreview />
               ) : (
@@ -56,18 +110,22 @@ export default function Home() {
                   <p className="text-muted-foreground">Select an image to preview</p>
                 </div>
               )}
-            </div>
+            </motion.div>
 
             {/* Right Panel - Controls */}
-            <div className="lg:col-span-3">
+            <motion.div 
+              className="lg:col-span-3"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+            >
               <div className="sticky top-24">
                 <CompressionControls />
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         )}
       </main>
     </div>
   );
 }
-
