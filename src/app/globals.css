@@ -55,9 +55,16 @@ body {
   overflow-x: hidden;
 }
 
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
 body {
-  color: hsl(var(--foreground));
-  background: hsl(var(--background));
   font-feature-settings:
     "rlig" 1,
     "calt" 1;
